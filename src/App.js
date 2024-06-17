@@ -1,14 +1,15 @@
-import Header from './Header';
+import Header from './components/Header';
+import Main from './components/Main';
 import './App.css';
 
 function App() {
   return (
-  <div className="App">
+    <div className="page">
       <Header />
-      <main>
-        {/* Add your main content here */}
-      </main>
-    </div>);
+      <hr class="new1"></hr>
+      <Main />
+    </div>
+  );
 }
 
 export default App;
