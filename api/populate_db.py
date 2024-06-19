@@ -23,8 +23,8 @@ def addto_news(entry_number,article,heading,link):
         db.session.add(news_object)
         db.session.commit()
 
-def addto_summaries(summary,entry_number):
+def addto_summaries(summary,entry_number,classID):
     with db.session.begin():
-        summary_object = summaries(Summary = summary, NewsID = entry_number)
+        summary_object = summaries(Summary = summary, NewsID = entry_number,ClassID = classID)
         db.session.add(summary_object)
         db.session.commit()

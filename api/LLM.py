@@ -33,6 +33,7 @@ entry_number = 0
 app = create_app()
 
 with app.app_context():
+    addto_classification()
     for site in news_sites:
 
         url, rss = morss.FeedFetch(site, options) 
@@ -52,14 +53,14 @@ with app.app_context():
                 link = entry.link
                 content =  str(entry.summary)
 
-                #content = re.sub("\<.>", "",content)
+                content = re.sub(r'<[^>]*>', "",content)
                 #content = re.sub("\</.>", "",content)
 
-                classification = random.choice(["1","2","3"])
+                classificationID = random.choice(["1","2","3"])
 
                 entry_number += 1
 
-                addto_news(entry_number, content,title,link,classification)
+                addto_news(entry_number, content,title,link)
 
                 #print(title+"\n"+link+"\n"+content)
 
@@ -68,7 +69,7 @@ with app.app_context():
                 output = generator(LLMprompt)[0]
                 output = output["summary_text"]
 
-                addto_summaries(output,entry_number)
+                addto_summaries(output,entry_number,classificationID)
 
                 Outputs.append(output)
 
